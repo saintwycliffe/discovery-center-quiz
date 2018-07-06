@@ -22,7 +22,9 @@ export default class Question extends Component {
     e.preventDefault();
     console.log('The link was clicked.', e.target.innerHTML);
     let answered = e.target.innerText.charAt(0);
-    let answer = quiz[0].questions[0].correctAnswer;
+    let currentQ = this.state.question;
+    let answer = quiz[0].questions[currentQ].correctAnswer;
+    answered === answer ? this.setState({ correct: true }) : this.setState({ correct: false });
     console.log('The link was clicked.', answered);
     console.log(answer, quiz[0].questions[0]);
     // this.setState({ active: true });
@@ -31,11 +33,12 @@ export default class Question extends Component {
     }, 1000)
     setTimeout(() => {
       let nextQ = 0;
-      this.state.question === 3 ? this.setState({ question: 0 }) : nextQ = this.state.question + 1;
+      let numberOfQuestions = Object.keys(quiz[0].questions).length; // Currently 5
+      this.state.question === numberOfQuestions - 1 ? console.log('must make win condition') : nextQ = this.state.question + 1;
       this.setState({ question: nextQ });
     }, 1300)
     setTimeout(() => {
-      this.handleClose();
+      // this.handleClose();
     }, 3000)
   }
   handleOpen = () => this.setState({ active: true })
@@ -44,8 +47,12 @@ export default class Question extends Component {
   render() {
 
     const { active } = this.state
+    let numberOfQuestions = Object.keys(quiz[0].questions).length;
     let currentQuestion = this.state.question;
+    let dispy = 0;
+    currentQuestion !== 0 ? dispy = currentQuestion - 1 : dispy = currentQuestion;
     let ques = quiz[0].questions[currentQuestion].question;
+    let fullAnswer = quiz[0].questions[dispy].correctText;
     let boxyClass = ["boxy"];
     if(this.state.addClass) {
         boxyClass.push('green');
@@ -67,7 +74,7 @@ export default class Question extends Component {
         <div className="quiz-container">
           <h1>Quiz interface</h1>
             <div className="question box">
-              <p><span>1.</span>{ques}</p>
+              <p><span>{currentQuestion + 1}/{numberOfQuestions}</span>{ques}</p>
             </div>
             <ul onClick={this.handleClick} className="answers">
               <Answer answerlet="a" questionnum={currentQuestion} />
@@ -80,8 +87,8 @@ export default class Question extends Component {
           <Dimmer active={active} onClick={this.handleClose} page>
             <Header as='h2' icon inverted>
               <Icon name='hand pointer outline' />
-              {incorrect()}
-              {/*<Header.Subheader>But no lucks</Header.Subheader>*/}
+              {this.state.correct ? correct() : incorrect()}
+              <Header.Subheader className="subtext">{fullAnswer}</Header.Subheader>
             </Header>
           </Dimmer>
 

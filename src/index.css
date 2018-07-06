@@ -7,6 +7,11 @@ body {
   background-size:cover;
 }
 
+.ui.inverted.header .sub.header {
+  color: blue !important;
+  animation: fadeIn 2s;
+}
+
 .boxy {
 }
 
@@ -25,7 +30,7 @@ body {
 }
 
 .ui.dimmer {
-  background-color: white !important; 
+  background-color: white !important;
 }
 
 @@keyframes fadeIn {

@@ -6,13 +6,11 @@ export default class Answer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      active: false,
       addClass: false,
       animation: 'flash',
       duration: 600,
       visible: true,
-      correct: true,
-      correctText: ''
+      correct: true
     };
   }
 
@@ -32,7 +30,6 @@ export default class Answer extends Component {
 
   render() {
     // ANIMATION
-    const { active } = this.state
     const { animation, duration, visible } = this.state
     let boxyClass = ["boxy"];
     if(this.state.addClass) {
