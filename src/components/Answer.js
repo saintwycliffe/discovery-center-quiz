@@ -24,6 +24,7 @@ export default class Answer extends Component {
     // console.log('The link was clicked.', answered);
     // console.log(answer, quiz[0].questions[0]);
     this.setState({ visible: !this.state.visible })
+    setTimeout(() => {this.toggle()}, 1500)
   }
   toggle() {
       this.setState({addClass: !this.state.addClass});

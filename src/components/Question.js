@@ -3,7 +3,6 @@ import quiz from '../Quiz.json';
 import Answer from './Answer';
 import { Dimmer, Header, Icon } from 'semantic-ui-react'
 
-const ques = quiz[0].questions[0].question;
 
 export default class Question extends Component {
   constructor(props){
@@ -12,7 +11,6 @@ export default class Question extends Component {
       active: false,
       addClass: false,
       correct: true,
-      correctText: 'asdf',
       score: 0,
       question: 0
     };
@@ -28,16 +26,17 @@ export default class Question extends Component {
     console.log('The link was clicked.', answered);
     console.log(answer, quiz[0].questions[0]);
     // this.setState({ active: true });
-    // Set timer to direct user to next question
-    // setTimeout(function(){ alert("Hello"); }, 3000);
     setTimeout(() => {
       this.handleOpen();
     }, 1000)
-    // setTimeout(() => {
-    //   this.handleClose();
-    // }, 5000)
-    // Set timer to direct user to next question
-    // setTimeout(function(){ alert("Hello"); }, 3000);
+    setTimeout(() => {
+      let nextQ = 0;
+      this.state.question === 3 ? this.setState({ question: 0 }) : nextQ = this.state.question + 1;
+      this.setState({ question: nextQ });
+    }, 1300)
+    setTimeout(() => {
+      this.handleClose();
+    }, 3000)
   }
   handleOpen = () => this.setState({ active: true })
   handleClose = () => this.setState({ active: false })
@@ -45,12 +44,22 @@ export default class Question extends Component {
   render() {
 
     const { active } = this.state
+    let currentQuestion = this.state.question;
+    let ques = quiz[0].questions[currentQuestion].question;
     let boxyClass = ["boxy"];
     if(this.state.addClass) {
         boxyClass.push('green');
       }
     console.log(this.state.question);
-    let ohyeah = this.state.question;
+    function correct() { return 'That\'s right!' }
+    function incorrect() { return 'NO!' }
+    // function incorrect() {
+    //   return (
+    //     <div>
+    //       <p>IS THAT RIGHT!?</p>
+    //     </div>
+    //   )
+    // }
 
     return (
       <div>
@@ -61,9 +70,9 @@ export default class Question extends Component {
               <p><span>1.</span>{ques}</p>
             </div>
             <ul onClick={this.handleClick} className="answers">
-              <Answer answerlet="a" questionnum={ohyeah} />
-              <Answer answerlet="b" questionnum={ohyeah} />
-              <Answer answerlet="c" questionnum={ohyeah} />
+              <Answer answerlet="a" questionnum={currentQuestion} />
+              <Answer answerlet="b" questionnum={currentQuestion} />
+              <Answer answerlet="c" questionnum={currentQuestion} />
             </ul>
           {/*<button className="box">Send<span>&rsaquo;</span></button>*/}
         </div>
@@ -71,8 +80,8 @@ export default class Question extends Component {
           <Dimmer active={active} onClick={this.handleClose} page>
             <Header as='h2' icon inverted>
               <Icon name='hand pointer outline' />
-              Good Guess!
-              <Header.Subheader>But no lucks</Header.Subheader>
+              {incorrect()}
+              {/*<Header.Subheader>But no lucks</Header.Subheader>*/}
             </Header>
           </Dimmer>
 
