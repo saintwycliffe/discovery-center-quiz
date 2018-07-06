@@ -57,7 +57,6 @@ export default class Question extends Component {
     if(this.state.addClass) {
         boxyClass.push('green');
       }
-    console.log(this.state.question);
     function correct() { return 'That\'s right!' }
     function incorrect() { return 'NO!' }
     // function incorrect() {

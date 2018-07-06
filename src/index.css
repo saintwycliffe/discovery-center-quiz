@@ -9,7 +9,8 @@ body {
 
 .ui.inverted.header .sub.header {
   color: blue !important;
-  animation: fadeIn 2s;
+  animation-delay: 4s;
+  animation: fadeIn 4s;
 }
 
 .boxy {
