@@ -8,7 +8,7 @@
         "About 7,000",
         "About 700"
       ],
-      "correctAnswer": "1",
+      "correctAnswer": "B",
       "correctText": "B: About 7,000"
     },
     {
@@ -18,7 +18,7 @@
         "Around 1,000",
         "Around 1,600"
       ],
-      "correctAnswer": "2",
+      "correctAnswer": "C",
       "correctText": "C: Around 1,600"
     },
     {
@@ -28,7 +28,7 @@
         "Europe",
         "Africa"
       ],
-      "correctAnswer": "2",
+      "correctAnswer": "C",
       "correctText": "C: Africa, with over 600 languages waiting for Bible translation projects."
     },
     {
@@ -38,7 +38,7 @@
         "Asia",
         "Americas"
       ],
-      "correctAnswer": "1",
+      "correctAnswer": "B",
       "correctText": "B: Asia, with over 500 languages waiting for Bible translation projects."
     },
     {
@@ -48,7 +48,7 @@
         "The Americas",
         "The Pacific"
       ],
-      "correctAnswer": "2",
+      "correctAnswer": "C",
       "correctText": "C: The Pacific, with over 300 languages waiting for Bible translation projects."
     }
   ]

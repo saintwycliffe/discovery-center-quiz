@@ -8,18 +8,24 @@ body {
 }
 
 .boxy {
-  color: blue;
-  width: 500px;
 }
 
 .boxy.green {
-  color: green;
-  background-color: purple; 
+  color: white !important;
+  background-color: #AA2D29 !important;
   font-family: times;
+}
+
+.boxy.green span {
+  background-color: #AA2D29 !important;
 }
 
 .dimmer {
   animation: fadeIn 1.5s;
+}
+
+.ui.dimmer {
+  /* background-color: white !important;  */
 }
 
 @@keyframes fadeIn {

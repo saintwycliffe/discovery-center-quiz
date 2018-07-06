@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Dimmerr from './components/Dimmer';
-import quiz from './Quiz.json';
+// import quiz from './Quiz.json';
 import Question from './components/Question';
 
-console.log(quiz[0].questions[0]);
+// console.log(quiz[0].questions[0]);
 // const q1 = quiz[0].questions[0].question;
 
 class App extends Component {
@@ -22,6 +22,5 @@ class App extends Component {
 }
 
 export default App;
-
 
 // Need Question[#] - AnswerList[0] - TrueAnswer[] - UserAnswer
