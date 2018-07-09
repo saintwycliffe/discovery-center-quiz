@@ -49,7 +49,7 @@ export default class Answer extends Component {
         }
       }
     // console.log(letterToNum(), 'sons of guns');
-    console.log('Passing PROPS!', this.props);
+    // console.log('Passing PROPS!', this.props);
     let option = quiz[0].questions[questionnum].answers[letterToNum()];
 
     return (

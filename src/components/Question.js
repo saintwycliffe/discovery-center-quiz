@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import quiz from '../Quiz.json';
 import Answer from './Answer';
 import { Dimmer, Header, Icon } from 'semantic-ui-react';
+import Gauge from './Victory.js';
 
 export default class Question extends Component {
   constructor(props){
@@ -23,7 +24,8 @@ export default class Question extends Component {
     let answered = e.target.innerText.charAt(0);
     let currentQ = this.state.question;
     let answer = quiz[0].questions[currentQ].correctAnswer;
-    answered === answer ? this.setState({ correct: true }) : this.setState({ correct: false });
+    let currentScore = this.state.score;
+    answered === answer ? this.setState({ correct: true, score: currentScore + 1 }) : this.setState({ correct: false });
     console.log('The link was clicked.', answered);
     console.log(answer, quiz[0].questions[0]);
     // this.setState({ active: true });
@@ -86,6 +88,7 @@ export default class Question extends Component {
 
     return (
       <div>
+        <Gauge questionper={(currentQuestion + 1)/numberOfQuestions} />
         { currentQuestion < 5 &&
         <div className="quiz-container">
           <h1>Quiz interface</h1>
