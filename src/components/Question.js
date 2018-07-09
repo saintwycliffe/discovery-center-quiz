@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import quiz from '../Quiz.json';
 import Answer from './Answer';
-import { Dimmer, Header, Icon } from 'semantic-ui-react'
-
+import { Dimmer, Header, Icon } from 'semantic-ui-react';
 
 export default class Question extends Component {
   constructor(props){
@@ -34,21 +33,30 @@ export default class Question extends Component {
     setTimeout(() => {
       let nextQ = 0;
       let numberOfQuestions = Object.keys(quiz[0].questions).length; // Currently 5
-      this.state.question === numberOfQuestions - 1 ? console.log('must make win condition') : nextQ = this.state.question + 1;
+      this.state.question === numberOfQuestions - 1 ? console.log('win condition?') : nextQ = this.state.question + 1;
       this.setState({ question: nextQ });
+      this.state.question === 0 ? this.setState({ question: 1}) : console.log('Do nothing.');
     }, 1300)
     setTimeout(() => {
       // this.handleClose();
     }, 3000)
   }
   handleOpen = () => this.setState({ active: true })
-  handleClose = () => this.setState({ active: false })
+  // handleClose = () => this.setState({ active: false })
+  handleClose = () => {
+    let numberOfQuestions = Object.keys(quiz[0].questions).length; // Currently 6
+    if (this.state.question === numberOfQuestions - 1){
+      console.log('Take win condition action on close'); // ? How keep score -> props down
+      this.setState({ active: false })
+    }
+    this.setState({ active: false })
+  }
 
   render() {
-
+    let currentQuestion = this.state.question;
     const { active } = this.state
     let numberOfQuestions = Object.keys(quiz[0].questions).length;
-    let currentQuestion = this.state.question;
+
     let dispy = 0;
     currentQuestion !== 0 ? dispy = currentQuestion - 1 : dispy = currentQuestion;
     let ques = quiz[0].questions[currentQuestion].question;
@@ -59,17 +67,26 @@ export default class Question extends Component {
       }
     function correct() { return 'That\'s right!' }
     function incorrect() { return 'NO!' }
-    // function incorrect() {
-    //   return (
-    //     <div>
-    //       <p>IS THAT RIGHT!?</p>
-    //     </div>
-    //   )
-    // }
+    function winState(displayCorrect) {
+      console.log(currentQuestion);
+      if (currentQuestion === 5) {
+        return sprea();
+      }
+      return displayCorrect;
+    }
+    function sprea() {
+      return (
+          <div>
+            <p>IS THAT RIGHT!? Winner</p>
+          </div>
+      )
+    }
+
+    // if Q# === 5/6 -> html / Else
 
     return (
       <div>
-
+        { currentQuestion < 5 &&
         <div className="quiz-container">
           <h1>Quiz interface</h1>
             <div className="question box">
@@ -82,11 +99,17 @@ export default class Question extends Component {
             </ul>
           {/*<button className="box">Send<span>&rsaquo;</span></button>*/}
         </div>
-
+        }
+        { currentQuestion === 5 &&
+          <div>
+          <h2>End of Game -> Win condition found</h2>
+          <p>{JSON.stringify(this.state)}</p>
+          </div>
+        }
           <Dimmer active={active} onClick={this.handleClose} page>
             <Header as='h2' icon inverted>
               <Icon name='hand pointer outline' />
-              {this.state.correct ? correct() : incorrect()}
+              {winState(this.state.correct ? correct() : incorrect())}
               <Header.Subheader className="subtext">{fullAnswer}</Header.Subheader>
             </Header>
           </Dimmer>
