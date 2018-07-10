@@ -42,7 +42,7 @@ export default class Gauge extends Component {
               labels={() => null}
               style={{
                 data: { fill: (d) => {
-                  const color = d.y > 30 ? "green" : "red";
+                  const color = d.y > 30 ? "red" : "red";
                   return d.x === 1 ? color : "transparent";
                 }
                 }

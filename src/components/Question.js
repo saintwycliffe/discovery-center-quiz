@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import quiz from '../Quiz.json';
 import Answer from './Answer';
-import { Dimmer, Header, Icon } from 'semantic-ui-react';
+import { Dimmer, Header, Icon, Button } from 'semantic-ui-react';
 import Gauge from './Victory.js';
 
 export default class Question extends Component {
@@ -15,6 +15,7 @@ export default class Question extends Component {
       question: 0
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleReset = this.handleReset.bind(this);
     }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -54,6 +55,17 @@ export default class Question extends Component {
     this.setState({ active: false })
   }
 
+  handleReset(e) {
+    e.preventDefault();
+    console.log('clicked');
+    this.setState({
+          active: false,
+          addClass: false,
+          correct: true,
+          score: 0,
+          question: 0 });
+  }
+
   render() {
     let currentQuestion = this.state.question;
     const { active } = this.state
@@ -69,22 +81,6 @@ export default class Question extends Component {
       }
     function correct() { return 'That\'s right!' }
     function incorrect() { return 'NO!' }
-    function winState(displayCorrect) {
-      console.log(currentQuestion);
-      if (currentQuestion === 5) {
-        return sprea();
-      }
-      return displayCorrect;
-    }
-    function sprea() {
-      return (
-          <div>
-            <p>IS THAT RIGHT!? Winner</p>
-          </div>
-      )
-    }
-
-    // if Q# === 5/6 -> html / Else
 
     return (
       <div>
@@ -93,7 +89,7 @@ export default class Question extends Component {
         <div className="quiz-container">
           <h1>Quiz interface</h1>
             <div className="question box">
-              <p><span>{currentQuestion + 1}/{numberOfQuestions}</span>{ques}</p>
+              <p><span>{currentQuestion + 1}/{numberOfQuestions - 1}</span>{ques}</p>
             </div>
             <ul onClick={this.handleClick} className="answers">
               <Answer answerlet="a" questionnum={currentQuestion} />
@@ -106,17 +102,19 @@ export default class Question extends Component {
         { currentQuestion === 5 &&
           <div>
           <h2>End of Game -> Win condition found</h2>
+          <h1>You got {this.state.score} out of {this.state.question} correct!</h1>
           <p>{JSON.stringify(this.state)}</p>
+          <button onClick={this.handleReset}>Play again?</button>
           </div>
         }
           <Dimmer active={active} onClick={this.handleClose} page>
             <Header as='h2' icon inverted>
               <Icon name='hand pointer outline' />
-              {winState(this.state.correct ? correct() : incorrect())}
+              {this.state.correct ? correct() : incorrect()}
               <Header.Subheader className="subtext">{fullAnswer}</Header.Subheader>
             </Header>
           </Dimmer>
-
+          <Button circular icon='redo' size='huge' onClick={this.handleReset} />Retry
       </div>
     )
   }
