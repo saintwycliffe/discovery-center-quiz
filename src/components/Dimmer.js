@@ -17,7 +17,7 @@ export default class Dimmerr extends Component {
           <Header as='h2' icon inverted>
             <Icon name='hand pointer outline' />
             Touch to Begin!
-            <Header.Subheader>Some sub-header</Header.Subheader>
+            <Header.Subheader>Test your knowledge</Header.Subheader>
           </Header>
         </Dimmer>
       </div>

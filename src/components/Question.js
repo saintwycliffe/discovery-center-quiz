@@ -70,7 +70,6 @@ export default class Question extends Component {
     let currentQuestion = this.state.question;
     const { active } = this.state
     let numberOfQuestions = Object.keys(quiz[0].questions).length;
-
     let dispy = 0;
     currentQuestion !== 0 ? dispy = currentQuestion - 1 : dispy = currentQuestion;
     let ques = quiz[0].questions[currentQuestion].question;
@@ -80,14 +79,14 @@ export default class Question extends Component {
         boxyClass.push('green');
       }
     function correct() { return 'That\'s right!' }
-    function incorrect() { return 'NO!' }
+    function incorrect() { return 'Not quite!' }
 
     return (
       <div>
         <Gauge questionper={(currentQuestion + 1)/numberOfQuestions} />
         { currentQuestion < 5 &&
         <div className="quiz-container">
-          <h1>Quiz interface</h1>
+          <h1 className="quiz-header">Wycliffe Quiz</h1>
             <div className="question box">
               <p><span>{currentQuestion + 1}/{numberOfQuestions - 1}</span>{ques}</p>
             </div>
@@ -101,20 +100,19 @@ export default class Question extends Component {
         }
         { currentQuestion === 5 &&
           <div>
-          <h2>End of Game -> Win condition found</h2>
+          <h2>End of Quiz</h2>
           <h1>You got {this.state.score} out of {this.state.question} correct!</h1>
-          <p>{JSON.stringify(this.state)}</p>
-          <button onClick={this.handleReset}>Play again?</button>
           </div>
         }
           <Dimmer active={active} onClick={this.handleClose} page>
             <Header as='h2' icon inverted>
-              <Icon name='hand pointer outline' />
               {this.state.correct ? correct() : incorrect()}
               <Header.Subheader className="subtext">{fullAnswer}</Header.Subheader>
+              <Icon name='hand pointer outline' />Touch to continue...
             </Header>
           </Dimmer>
-          <Button circular icon='redo' size='huge' onClick={this.handleReset} />Retry
+          <br /><br />
+          <Button circular icon='redo' size='massive' onClick={this.handleReset} />Retry
       </div>
     )
   }
