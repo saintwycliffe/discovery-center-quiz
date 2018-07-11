@@ -83,10 +83,10 @@ export default class Question extends Component {
 
     return (
       <div>
+        <h1 className="quiz-header">Wycliffe Quiz</h1>
         <Gauge questionper={(currentQuestion + 1)/numberOfQuestions} />
         { currentQuestion < 5 &&
         <div className="quiz-container">
-          <h1 className="quiz-header">Wycliffe Quiz</h1>
             <div className="question box">
               <p><span>{currentQuestion + 1}/{numberOfQuestions - 1}</span>{ques}</p>
             </div>

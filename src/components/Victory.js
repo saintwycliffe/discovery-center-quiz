@@ -32,7 +32,9 @@ export default class Gauge extends Component {
       return (
         <div>
           <svg viewBox="0 0 400 400" width="20%" height="100%">
+          <div className="innerCirc"></div>
             <VictoryPie
+              className="innerPie"
               standalone={false}
               animate={{ duration: 1000 }}
               width={400} height={400}
